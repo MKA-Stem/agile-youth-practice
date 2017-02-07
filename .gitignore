@@ -1,0 +1,4 @@
+# Rethinkdb data dir for dev
+__data
+.DS_Store
+client/node_modules
