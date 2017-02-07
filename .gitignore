@@ -1,4 +1,8 @@
 # Rethinkdb data dir for dev
 __data
+
 .DS_Store
+
+# Node stuff
 client/node_modules
+npm-debug.log
