@@ -1,7 +1,5 @@
 SHELL := /usr/bin/env bash
 
-all: deps dev
-
 
 setup:
 	@if which node >/dev/null && which python3 >/dev/null && which rethinkdb >/dev/null ; then \
