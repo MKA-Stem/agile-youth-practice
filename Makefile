@@ -3,12 +3,25 @@ SHELL := /usr/bin/env bash
 all: deps dev
 
 
-setup: 
-	@if [[ $$(uname) == "Darwin" ]];\
-		then make setup.osx;                        \
-		else make setup.linux;                      \
+setup:
+	@if which node >/dev/null && which python3 >/dev/null && which rethinkdb >/dev/null ; then \
+		echo "Node, python3, rethink already installed"; \
+	else \
+		if [[ $$(uname) == "Darwin" ]]; \
+			then make setup.osx;                        \
+			else make setup.linux;                      \
+		fi; \
 	fi
 	
+	-npm install -g yarn #Sometimes has funky perms, sort of optional
+	pip3 install virtualenv
+	
+	cd client && yarn
+	
+	@# Setup python env and deps
+	-[[ ! -d "venv" ]] && virtualenv venv
+	source venv/bin/activate && pip3 install -r requirements.txt
+
 
 setup.osx:
 	@echo "--- Installing OSX specific dependencies"
@@ -30,7 +43,6 @@ setup.linux:
 	@echo "--- Installing Linux specific dependencies"
 	sudo apt -y update
 	[[ $$(which node) && $$(which npm) ]] || sudo apt -y install nodejs-legacy
-	
 
 	@# Rethinkdb
 	@# Copypasta from https://www.rethinkdb.com/docs/install/ubuntu/
