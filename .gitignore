@@ -5,7 +5,7 @@ __data
 
 # Node stuff
 client/node_modules
-npm-debug.log
+**/npm-debug.log*
 
 # Python stuff
 venv

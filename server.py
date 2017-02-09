@@ -2,15 +2,17 @@
 from flask import Flask, send_from_directory, request, jsonify
 from werkzeug.exceptions import NotFound
 from lib.db import connect, r # this is rethink
-
+import os
 
 app = Flask(__name__, static_folder=None)
 
 
-#API blueprint
+# API blueprint
 from api import api as api_blueprint
 app.register_blueprint(api_blueprint, url_prefix="/api")
 
+
+# Serve stuff for SPA
 @app.route("/", defaults={"path":"index.html"})
 @app.route("/<path:path>")
 def index(path):
@@ -25,5 +27,9 @@ def index(path):
     return result
 
 
-if __name__ == "__main__":
-    app.run()
+# Don't use this, use flask-cli
+# if __name__ == "__main__":
+#     PORT = os.getenv("PORT")
+#     DEBUG = os.getenv("DEBUG").lower().strip() in ("true", "1", "yes") \
+#             or os.getenv("FLASK_DEBUG").lower().strip() in ("true", "1", "yes")
+#     app.run()

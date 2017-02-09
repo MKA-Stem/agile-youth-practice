@@ -1,5 +1,11 @@
 SHELL := /usr/bin/env bash
 
+all: deps dev
+
+# Env vars for Flask cli
+export PYTHONPATH := $$(pwd):$(PYTHONPATH)
+export FLASK_APP=server.py
+export FLASK_DEBUG=1
 
 setup:
 	@if which node >/dev/null && which python3 >/dev/null && which rethinkdb >/dev/null ; then \
@@ -60,4 +66,4 @@ run.db:
 	rethinkdb --config-file rethinkdb.conf
 
 run.server:
-	python3 server.py
+	source venv/bin/activate && flask run --port 8080
