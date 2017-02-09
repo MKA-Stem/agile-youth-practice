@@ -6,6 +6,7 @@ all: deps dev
 export PYTHONPATH := $$(pwd):$(PYTHONPATH)
 export FLASK_APP=server.py
 export FLASK_DEBUG=1
+export SECRET=581892a3c50014023b30
 
 setup:
 	@if which node >/dev/null && which python3 >/dev/null && which rethinkdb >/dev/null ; then \

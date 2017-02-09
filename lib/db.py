@@ -20,9 +20,14 @@ def setup():
         if name not in r.table_list().run(cn):
             r.table_create(name).run(cn)
 
+    def mkindex(table, index):
+        if index not in r.table(table).index_list().run(cn):
+            r.table(table).index_create(index).run(cn)
+
     if DB_NAME not in r.db_list().run(cn):
         r.db_create(DB_NAME).run(cn)
     
-    mktable("test")
+    mktable("users")
+    mkindex("users", "username")
 
 r = r
