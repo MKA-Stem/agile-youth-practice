@@ -3,8 +3,8 @@ SHELL := /usr/bin/env bash
 all: deps dev
 
 # Env vars for Flask cli
-export PYTHONPATH := $$(pwd):$(PYTHONPATH)
-export FLASK_APP=server.py
+export PYTHONPATH=$$(PYTHONPATH):$(shell pwd)
+export FLASK_APP=server
 export FLASK_DEBUG=1
 export SECRET=581892a3c50014023b30
 
@@ -18,7 +18,7 @@ setup:
 		fi; \
 	fi
 	
-	-npm install -g yarn #Sometimes has funky perms, sort of optional
+	-which yarn >/dev/null || npm install -g yarn || sudo npm install -g yarn #Sometimes has funky perms, sort of optional
 	pip3 install virtualenv
 	
 	cd client && yarn
@@ -62,6 +62,9 @@ setup.linux:
 	@# Updates and stuff
 	sudo apt -y upgrade nodejs-legacy python3
 
+setup.db:
+	@echo "--- Setting up Database"
+	source venv/bin/activate && python -m lib.db
 
 run.db:
 	rethinkdb --config-file rethinkdb.conf

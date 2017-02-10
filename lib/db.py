@@ -31,3 +31,6 @@ def setup():
     mkindex("users", "username")
 
 r = r
+
+# Setup db if run
+if __name__ == "__main__": setup()
