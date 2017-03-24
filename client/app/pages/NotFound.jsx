@@ -1,13 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router';
 
-export class MainPage extends React.Component{
-    render(){
-        return (
-            <div>
-                <h1>404</h1>
-                <div>Page not found</div>
-            </div>
-        );
-    }
-}
+export var NotFound = props => (
+	<div>
+		<h2>404: Page Not Found</h2>
+		<h4>Oops.</h4>
+	</div>
+)
