@@ -21,6 +21,7 @@ setup:
 	-which yarn >/dev/null || npm install -g yarn || sudo npm install -g yarn #Sometimes has funky perms, sort of optional
 	pip3 install virtualenv
 	
+	yarn global add webpack webpack-dev-server
 	cd client && yarn
 	
 	@# Setup python env and deps
@@ -62,12 +63,20 @@ setup.linux:
 	@# Updates and stuff
 	sudo apt -y upgrade nodejs-legacy python3
 
-setup.db:
+db.setup:
 	@echo "--- Setting up Database"
 	source venv/bin/activate && python -m lib.db
 
-run.db:
+db.start:
 	rethinkdb --config-file rethinkdb.conf
 
-run.server:
+dev.server:
+	source venv/bin/activate && flask run --port 8081
+
+dev.client:
+	cd client && webpack-dev-server
+
+app.start:
+	cd client && NODE_ENV="production" webpack -p --progress
+	cp client/app/index.html client/dist/index.html
 	source venv/bin/activate && flask run --port 8080

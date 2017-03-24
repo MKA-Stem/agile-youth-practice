@@ -2,6 +2,7 @@
 __data
 
 .DS_Store
+./**/.tern-port
 
 # Node stuff
 client/node_modules
