@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from "react-helmet";
 import { Link } from 'react-router';
 
-import "pages/pageFrame.scss";
+import "pages/PageFrame.scss";
 
 var DEV = process.env.NODE_ENV != "production";
 
