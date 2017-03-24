@@ -15,3 +15,6 @@ venv
 
 # Client build
 client/dist
+
+# IDE stuff
+.vscode
