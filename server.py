@@ -18,12 +18,12 @@ app.register_blueprint(api_blueprint, url_prefix="/api")
 def index(path):
     result = None
     try:
-        result = send_from_directory("client/app", path)
+        result = send_from_directory("client/dist", path)
     except NotFound as e:
         if path.endswith(".js") or path.endswith(".css") or path.endswith(".svg"):
             raise NotFound
         else:
-            result = send_from_directory("client/app", "index.html")
+            result = send_from_directory("client/dist", "index.html")
     return result
 
 
