@@ -68,7 +68,7 @@ module.exports = {
 	module: {
 		rules:[
 			{
-				test:/\.s?css$/,
+				test:/\.s?(c|a)ss$/,
 				use:DEV?
 					[
 						{loader:"style-loader", options:{sourceMap:true}},
